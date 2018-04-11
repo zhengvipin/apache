@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="poi:war">
+    <output-path>$PROJECT_DIR$/poi/target</output-path>
+    <root id="archive" name="poi.war">
+      <element id="artifact" artifact-name="poi:war exploded" />
+    </root>
+  </artifact>
+</component>
