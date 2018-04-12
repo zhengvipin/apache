@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Car List</title>
+    <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container text-center">
+    <h3>小汽车列表</h3>
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>车名</th>
+            <th>价格</th>
+            <th>生产日期</th>
+            <th>图片路径</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <a class="btn btn-outline-primary" href="api/download.action">生成xml表格</a>
+</div>
+<script src="static/js/jquery.2.1.4.min.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            type: "get",
+            url: "/api/find.action",
+            dataType: "json",
+            success: (cars)=>{
+                //console.log(cars)
+                let text = ``;
+                $.each(cars,(i,item)=>{
+                    text += `
+                        <tr>
+                            <td>${i}</td>
+                            <td>${item.name}</td>
+                            <td>${item.price}</td>
+                            <td>${item.createDate}</td>
+                            <td>${item.img}</td>
+                        </tr>
+                    `;
+                });
+                $('tbody').append(text);
+            }
+        })
+    });
+</script>
+</body>
+</html>

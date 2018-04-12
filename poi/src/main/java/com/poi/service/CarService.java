@@ -3,6 +3,8 @@ package com.poi.service;
 import com.poi.domain.Car;
 import com.poi.mapper.CarMapper;
 import com.poi.util.ExcelUtils;
+import com.poi.util.ExcelUtils2;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,10 +37,29 @@ public class CarService {
             dataList.add(objects);
         }
         ExcelUtils.exportExcel("小汽车",
-                                        rowsName,
-                                        dataList,
-                                        "yyyy-MM-dd",
-                                        request,
-                                        response);
+                rowsName,
+                dataList,
+                "yyyy-MM-dd",
+                request,
+                response);
+    }
+
+    public HSSFWorkbook exportExcel(List<Car> cars) throws IOException {
+        String[] rowsName = new String[]{"序号", "车名", "价格", "生产日期", "图片路径"};
+        List<Object[]> dataList = new ArrayList<>();
+        for (int i = 0; i < cars.size(); i++) {
+            Object[] objects = new Object[rowsName.length];
+            Car car = cars.get(i);
+            objects[0] = i + 1;
+            objects[1] = car.getName();
+            objects[2] = car.getPrice();
+            objects[3] = car.getCreateDate();
+            objects[4] = car.getImg();
+            dataList.add(objects);
+        }
+        return ExcelUtils2.exportExcel("小汽车",
+                rowsName,
+                dataList,
+                "yyyy-MM-dd");
     }
 }

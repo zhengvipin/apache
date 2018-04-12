@@ -12,6 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+/**
+ * 这个是先在磁盘生成excel表格，再提供下载
+ *
+ * @author Zheng
+ */
 @Controller
 public class CarController {
     @Resource(name = "carService")
@@ -29,7 +34,7 @@ public class CarController {
         // 获得要导出的数据集合
         List<Car> cars = carService.findAll();
         // 生成xml文件
-        carService.download(cars,request,response);
+        carService.download(cars, request, response);
         return "index";
     }
 }

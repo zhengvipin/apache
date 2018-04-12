@@ -1,5 +1,8 @@
 package com.poi.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,7 +11,9 @@ public class Car implements Serializable {
     
     private Integer id;
     private String name;
+    @JsonFormat(pattern = "######.00")
     private Double price;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createDate;
     private String img;
 
